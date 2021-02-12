@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker build -f sdc-pipeline.dockerfile  -t srcsakthivel/sdc-pipeline --build-arg SDC_LIBS=streamsets-datacollector-azure-lib .

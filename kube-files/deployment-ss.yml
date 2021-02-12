@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sdc-with-pipeline
+spec:
+ selector:
+   matchLabels:
+     app: sdc-with-pipeline
+ template:
+   metadata:
+     labels:
+       app: sdc-with-pipeline
+   spec:
+     containers:
+     - name: my-sdc
+       image: srcsakthivel/sdc-pipeline
+       env:
+       - name: SDC_CONF_http_authentication
+         value: form
+       ports:
+        - containerPort: 18630
+          name: http
+       lifecycle:
+        postStart:
+          exec:
+            command: ["/bin/sh", "-c", "cd resources/; bash import.sh;"]
